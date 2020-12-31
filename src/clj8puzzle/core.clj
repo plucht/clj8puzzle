@@ -55,3 +55,8 @@
   [state] 
   (let [i (index-of state 0)] 
     (if (#{6 7 8} i) nil (swapv state i (+ i 3)))))
+
+(defn generate-states 
+  "Returns a list of all possible next states for the current (given) state."
+  [state]
+  (filter some? [(move-up state) (move-right state) (move-down state) (move-left state)]))
