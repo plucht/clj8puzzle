@@ -28,7 +28,7 @@
     [(int (/ i 3)) (rem i 3)]))
 
 (defn swapv 
-  "Returns a vector with values of indices i and j swapped."
+  "Returns a vector with values at indices i and j swapped."
   [v i j] 
   (assoc v i (v j) j (v i)))
 
