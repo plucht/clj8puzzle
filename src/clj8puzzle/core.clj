@@ -3,9 +3,14 @@
 
 (defn -main
   "I don't do a whole lot ... yet."
+  ; probably something like: 
+  ;   read input
+  ;   update state or find shortest path to final state
+  ;   output result
   [& args]
   (println "Hello, World!"))
 
+; only for REPL interaction - remove before release
 (def initialState [1 2 3
                    4 5 6
                    7 0 8])
@@ -15,6 +20,7 @@
   [state n] 
   (get (zipmap state (iterate inc 0)) n))
 
+; probably deprecated - remove before release
 (defn coordinates-of 
   "Returns a vector of zero-indexed x,y coordinates."
   [state n] 
