@@ -48,6 +48,11 @@
   (testing "Goal is three moves away."
     (is (= [1 2 3 4 5 6 7 8 0] (first (solve [1 2 3 0 4 5 7 8 6]))))))
 
+(deftest ^:slow regression-1-test
+  (testing "This test data provokes unexplored-nodes to be nil at some point.
+            The solution space must not be updated with nil or empty collections."
+    (is (= [1 2 3 4 5 6 7 8 0] (first (solve [1 2 3, 4 5 0, 6 7 8]))))))
+
 (deftest solution-space-test
   (testing "It walks through the solution space and constructs a shortest path."
     (let [initial-state [1 2 3 4 5 6 0 7 8]

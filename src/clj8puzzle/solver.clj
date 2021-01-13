@@ -34,7 +34,9 @@
                   (without generated-nodes closed-list open-list)
 
                   updated-solution-space
-                  (apply assoc solution-space (interleave unexplored-nodes (repeat node)))
+                  (if (empty? unexplored-nodes)
+                    solution-space
+                    (apply assoc solution-space (interleave unexplored-nodes (repeat node))))
 
                   updated-open-list
                   (apply conj (pop open-list) unexplored-nodes)
