@@ -4,16 +4,17 @@
 
 (defn state->str
   [s]
-  (reduce #(str %1 %2 "\n") ""
-    (map #(subs (clojure.string/join " " s) %1 (+ %1 5)) '(0 6 12))))
+  (->> (map #(subs (clojure.string/join " " s) %1 (+ %1 5)) '(0 6 12))
+       (clojure.string/join "\n")))
 
-(defn print-path 
+(defn print-path
   [path]
   (loop [p path]
-    (if (seq p) 
-      (do 
+    (if (seq p)
+      (do
         (println "Moving to:")
         (println (state->str (peek p)))
+        (println "")
         (recur (pop p))))))
 
 (defn parse-input
@@ -33,7 +34,7 @@
         (parse-input input)
         (if (valid-input? input)
           (do
-            (if-let [[_, solution-space] (solve input)]  
+            (if-let [[_, solution-space] (solve input)]
               (print-path (shortest-path solution-space input))
               (println "No solution found."))
           )

@@ -4,7 +4,7 @@
 
 (deftest pretty-print-test
   (testing "It transforms the state to a pretty string."
-    (is (= (state->str [1 2 3 4 5 6 7 8 0]) "1 2 3\n4 5 6\n7 8 0\n"))))
+    (is (= (state->str [1 2 3 4 5 6 7 8 0]) "1 2 3\n4 5 6\n7 8 0"))))
 
 (deftest valid-input?-test
   (testing "Input is valid if it contains all digits from 0..8 (inclusive)."
