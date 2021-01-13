@@ -1,11 +1,20 @@
 (ns clj8puzzle.core
-  (:require [clj8puzzle.solver :refer [solve]])
+  (:require [clj8puzzle.solver :refer [shortest-path solve]])
   (:gen-class))
 
 (defn state->str
   [s]
   (reduce #(str %1 %2 "\n") ""
     (map #(subs (clojure.string/join " " s) %1 (+ %1 5)) '(0 6 12))))
+
+(defn print-path 
+  [path]
+  (loop [p path]
+    (if (seq p) 
+      (do 
+        (println "Moving to:")
+        (println (state->str (peek p)))
+        (recur (pop p))))))
 
 (defn parse-input
   "Construct vector of digits from string."
@@ -24,8 +33,8 @@
         (parse-input input)
         (if (valid-input? input)
           (do
-            (println "Initial state:")
-            (println (state->str input))
-            (println "Solution:" (solve input))
+            (if-let [[_, solution-space] (solve input)]  
+              (print-path (shortest-path solution-space input))
+              (println "No solution found."))
           )
           (println "Invalid input."))))
