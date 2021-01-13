@@ -1,5 +1,7 @@
 (ns clj8puzzle.solver
-    (:require [clojure.set :refer [difference]])
+    (:require [clojure.set :refer [difference]]
+              [clj8puzzle.core :refer [generate-states]]
+              )
     (:gen-class))
   
 (defn goal? 
@@ -23,8 +25,8 @@
                 (let [node 
                       (peek open-list)
                       
-                      generated-nodes 
-                      [[1 2 3 4 5 6 7 8 0] [1 2 3 4 5 6 0 7 8] [1 2 3 4 0 6 7 5 8]] ; stub values
+                      generated-nodes (generate-states node)
+                      ; [[1 2 3 4 5 6 7 8 0] [1 2 3 4 5 6 0 7 8] [1 2 3 4 0 6 7 5 8]] ; stub values
                       
                       unexplored-nodes 
                       (without generated-nodes closed-list open-list)
