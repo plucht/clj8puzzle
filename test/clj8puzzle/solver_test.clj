@@ -12,7 +12,7 @@
 
 (deftest filter-unexplored-test
     (testing "Only keep nodes which are neither in open list nor closed list."
-        (is (= '([3 4]) (filter-unexplored [[1 2] [3 4] [5 6]] [1 2] [5 6]))))) ; todo: probably update test data
+        (is (= '([3 4]) (without [[1 2] [3 4] [5 6]] [1 2] [5 6]))))) ; todo: probably update test data
 
 (deftest initial-state-is-goal-test
     (testing "Initial state is already the goal."
