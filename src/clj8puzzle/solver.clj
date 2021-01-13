@@ -2,9 +2,10 @@
     (:require [clojure.set :refer [difference]])
     (:gen-class))
   
-(defn goal? [state] 
-    (let [goal [1 2 3 4 5 6 7 8 0]] 
-        (= goal state)))
+(defn goal? 
+    [state]
+    "Check if state is the desired final state of the game." 
+    (= state [1 2 3 4 5 6 7 8 0]))
 
 (defn without 
     [collection & others] 
