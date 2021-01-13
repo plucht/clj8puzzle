@@ -14,7 +14,7 @@
 
 (defn solve [state]
     (loop [open-list (conj clojure.lang.PersistentQueue/EMPTY state)
-           closed-list []]
+           closed-list #{}]
             (if (goal? (peek open-list)) (peek open-list) 
                 (if (empty? open-list) nil ; no solution
                 (let [node 
@@ -30,7 +30,7 @@
                       (apply conj (pop open-list) unexplored-nodes)
                       
                       updated-closed-list 
-                      (conj closed-list node (without generated-nodes unexplored-nodes))
+                      (apply conj closed-list node (without generated-nodes unexplored-nodes))
                      ]
                     (recur updated-open-list updated-closed-list)
                 ))
