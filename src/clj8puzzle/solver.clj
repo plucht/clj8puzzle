@@ -10,7 +10,10 @@
 (defn without 
     [collection & others] 
     "Get collection without values present in any other given collection."
-    (seq (difference (set collection) (set others))))
+    (seq 
+        (difference 
+            (set collection) 
+            (reduce #(into %1 %2) #{} (map set others)))))
 
 (defn solve [state]
     (loop [open-list (conj clojure.lang.PersistentQueue/EMPTY state)
