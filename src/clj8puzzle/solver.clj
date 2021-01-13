@@ -4,13 +4,13 @@
   (:gen-class))
 
 (defn goal?
-  [state]
   "Check if state is the desired final state of the game."
+  [state]
   (= state [1 2 3 4 5 6 7 8 0]))
 
 (defn without
-  [collection & others]
   "Get collection without values present in any other given collection."
+  [collection & others]
   (->> (map set others)
        (reduce #(into %1 %2) #{})
        (set)

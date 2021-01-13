@@ -11,20 +11,20 @@
   [v i j]
   (assoc v i (v j) j (v i)))
 
-(defn move 
-  "Returns a vector with '0' moved one field in direction or nil if '0' can't be moved." 
+(defn move
+  "Returns a vector with '0' moved one field in direction or nil if '0' can't be moved."
   [direction state]
   (direction state (index-of state 0)))
 
-(defn left 
-  [state i] 
+(defn left
+  [state i]
   (if (#{0 3 6} i) nil (swapv state i (dec i))))
 
-(defn right 
+(defn right
   [state i]
   (if (#{2 5 8} i) nil (swapv state i (inc i))))
 
-(defn up 
+(defn up
   [state i]
   (if (#{0 1 2} i) nil (swapv state i (- i 3))))
 
