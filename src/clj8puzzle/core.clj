@@ -1,20 +1,31 @@
 (ns clj8puzzle.core
+  (:require [clj8puzzle.solver :refer [solve]])
   (:gen-class))
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  ; probably something like:
-  ;   read input
-  ;   update state or find shortest path to final state
-  ;   output result
-  [& args]
-  (println "Hello, World!"))
-
-; only for REPL interaction - remove before release
-(def initialState [1 2 3
-                   4 5 6
-                   7 0 8])
-
-(defn state->str [s]
+(defn state->str 
+  [s]
   (reduce #(str %1 %2 "\n") ""
     (map #(subs (clojure.string/join " " s) %1 (+ %1 5)) '(0 6 12))))
+
+(defn parse-input 
+  [input]
+  "Construct vector of digits from string." 
+  (mapv #(Integer/parseInt % 10) (re-seq #"\d" input)))
+
+(defn valid-input? 
+  [collection] 
+  "Check wether all digits from 0 to 8 are present in collection."
+  (= 9 (count (set (filter #(and (<= 0 %) (>= 8 %)) collection)))))
+
+(defn -main
+  [& args]
+  (println "Enter game state ([1 2 3 4 5 6 0 7 8])")
+  (as-> (read-line) input
+        (parse-input input)
+        (if (valid-input? input) 
+          (do
+            (println "Initial state:")
+            (println (state->str input)) 
+            (println "Solution:" (solve input)) 
+          )
+          (println "Invalid input."))))
