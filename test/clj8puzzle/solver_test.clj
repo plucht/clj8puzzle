@@ -32,18 +32,18 @@
 
 (deftest initial-state-is-goal-test
   (testing "Initial state is already the goal."
-    (is (= [1 2 3 4 5 6 7 8 0] (solve [1 2 3 4 5 6 7 8 0])))))
+    (is (= [1 2 3 4 5 6 7 8 0] (first (solve [1 2 3 4 5 6 7 8 0]))))))
 
 (deftest one-move-away-test
   (testing "Goal is one move away."
-    (is (= [1 2 3 4 5 6 7 8 0] (solve [1 2 3 4 5 6 7 0 8])))
-    (is (= [1 2 3 4 5 6 7 8 0] (solve [1 2 3 4 5 0 7 8 6])))))
+    (is (= [1 2 3 4 5 6 7 8 0] (first (solve [1 2 3 4 5 6 7 0 8]))))
+    (is (= [1 2 3 4 5 6 7 8 0] (first (solve [1 2 3 4 5 0 7 8 6]))))))
 
 (deftest two-moves-away-test
   (testing "Goal is two moves away."
-    (is (= [1 2 3 4 5 6 7 8 0] (solve [1 2 3 4 5 6 0 7 8])))
-    (is (= [1 2 3 4 5 6 7 8 0] (solve [1 2 3 4 0 5 7 8 6])))))
+    (is (= [1 2 3 4 5 6 7 8 0] (first (solve [1 2 3 4 5 6 0 7 8]))))
+    (is (= [1 2 3 4 5 6 7 8 0] (first (solve [1 2 3 4 0 5 7 8 6]))))))
 
 (deftest three-moves-away-test
   (testing "Goal is three moves away."
-    (is (= [1 2 3 4 5 6 7 8 0] (solve [1 2 3 0 4 5 7 8 6])))))
+    (is (= [1 2 3 4 5 6 7 8 0] (first (solve [1 2 3 0 4 5 7 8 6]))))))
