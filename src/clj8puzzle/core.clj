@@ -28,7 +28,7 @@
 
 (defn -main
   [& args]
-  (println "Enter initial state as sequence of number (i.e. \"1 2 3 4 5 6 0 7 8\"):")
+  (println "Enter initial state as sequence of digits 0..8 (i.e. \"1 2 3 4 5 6 0 7 8\"):")
   (as-> (read-line) input
         (parse-input input)
         (if (valid-input? input)
