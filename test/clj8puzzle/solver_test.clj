@@ -47,3 +47,20 @@
 (deftest three-moves-away-test
   (testing "Goal is three moves away."
     (is (= [1 2 3 4 5 6 7 8 0] (first (solve [1 2 3 0 4 5 7 8 6]))))))
+
+(deftest solution-space-test
+  (testing "It walks through the solution space and constructs a shortest path."
+    (let [initial-state [1 2 3 4 5 6 0 7 8]
+          expected-path [[1 2 3 4 5 6 0 7 8]
+                         [1 2 3 4 5 6 7 0 8]
+                         [1 2 3 4 5 6 7 8 0]]
+          solution-space {[1 2 3 4 0 6 7 5 8] [1 2 3 4 5 6 7 0 8], 
+                          [1 2 3 4 6 0 7 5 8] [1 2 3 4 0 6 7 5 8], 
+                          [1 2 3 5 0 6 4 7 8] [1 2 3 0 5 6 4 7 8], 
+                          [0 2 3 1 5 6 4 7 8] [1 2 3 0 5 6 4 7 8], 
+                          [1 2 3 4 5 6 7 0 8] [1 2 3 4 5 6 0 7 8], 
+                          [1 2 3 0 5 6 4 7 8] [1 2 3 4 5 6 0 7 8], 
+                          [1 2 3 4 5 6 7 8 0] [1 2 3 4 5 6 7 0 8], 
+                          [1 0 3 4 2 6 7 5 8] [1 2 3 4 0 6 7 5 8], 
+                          [1 2 3 0 4 6 7 5 8] [1 2 3 4 0 6 7 5 8]}]
+        (is (= (shortest-path solution-space initial-state) expected-path)))))
