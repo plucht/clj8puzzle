@@ -33,9 +33,7 @@
   (as-> (read-line) input
         (parse-input input)
         (if (valid-input? input)
-          (do
-            (if-let [[_, solution-space] (solve input)]
-              (print-path (shortest-path solution-space input))
-              (println "No solution found."))
-          )
+          (if-let [[_, solution-space] (solve input)]
+            (print-path (shortest-path solution-space input))
+            (println "No solution found."))
           (println "Invalid input."))))

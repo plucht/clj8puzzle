@@ -49,7 +49,9 @@
 (defn shortest-path
   "Returns a vector of as few as possible consecutive states which lead to the finale state."
   [solution-space initial-state]
-  (loop [current-state [1 2 3 4 5 6 7 8 0] path (list current-state)]
-    (let [previous-state (solution-space current-state)
-          updated-path (conj path previous-state)]
-      (if (= previous-state initial-state) updated-path (recur previous-state updated-path)))))
+  (if (empty? solution-space) 
+    [initial-state]
+    (loop [current-state [1 2 3 4 5 6 7 8 0] path (list current-state)]
+      (let [previous-state (solution-space current-state)
+            updated-path (conj path previous-state)]
+        (if (= previous-state initial-state) updated-path (recur previous-state updated-path))))))

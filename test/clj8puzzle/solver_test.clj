@@ -69,3 +69,8 @@
                           [1 0 3, 4 2 6, 7 5 8] [1 2 3, 4 0 6, 7 5 8], 
                           [1 2 3, 0 4 6, 7 5 8] [1 2 3, 4 0 6, 7 5 8]}]
         (is (= (shortest-path solution-space initial-state) expected-path)))))
+
+(deftest empty-solution-space-test
+  (testing "It returns the given state as only node of path for an empty solution space."
+    (let [initial-state [1 2 3, 4 5 6, 7 8 0]]
+      (is (= [initial-state] (shortest-path {} initial-state))))))
