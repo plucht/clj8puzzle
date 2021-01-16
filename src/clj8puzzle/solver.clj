@@ -3,7 +3,7 @@
             [clj8puzzle.state :refer [generate-states]])
   (:gen-class))
 
-(defn goal?
+(defn final-state?
   "Check if state is the desired final state of the game."
   [state]
   (= state [1 2 3 4 5 6 7 8 0]))
@@ -22,7 +22,7 @@
          closed-list #{}
          solution-space {}
          ]
-        (if (goal? (peek open-list)) (list (peek open-list) solution-space)
+        (if (final-state? (peek open-list)) (list (peek open-list) solution-space)
           (if (empty? open-list) nil ; no solution
             (let [node
                   (peek open-list)

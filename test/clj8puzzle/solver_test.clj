@@ -2,13 +2,13 @@
   (:require [clojure.test :refer :all]
             [clj8puzzle.solver :refer :all]))
 
-(deftest goal-test
-  (testing "Goal test happy case."
-    (is (true? (goal? [1 2 3, 4 5 6, 7 8 0])))))
+(deftest final-state-test
+  (testing "Given state is the final state."
+    (is (true? (final-state? [1 2 3, 4 5 6, 7 8 0])))))
 
-(deftest goal-test
-  (testing "Goal test unhappy case."
-    (is (false? (goal? [1 2 3, 4 5 6, 7 0 8])))))
+(deftest not-final-state-test
+  (testing "Given state is not the final state."
+    (is (false? (final-state? [1 2 3, 4 5 6, 7 0 8])))))
 
 (deftest without-one-collection-test
   (testing "Only keep nodes which are not in queue."
@@ -31,21 +31,21 @@
         (is (= '([3 4]) (without nodes open-list closed-list))))))
 
 (deftest initial-state-is-final-state-test
-  (testing "Initial state is already the final state (goal)."
+  (testing "Initial state is already the final state."
     (is (= [1 2 3, 4 5 6, 7 8 0] (first (solve [1 2 3, 4 5 6, 7 8 0]))))))
 
 (deftest one-move-away-test
-  (testing "Final state (goal) is one move away."
+  (testing "Final state is one move away."
     (is (= [1 2 3, 4 5 6, 7 8 0] (first (solve [1 2 3, 4 5 6, 7 0 8]))))
     (is (= [1 2 3, 4 5 6, 7 8 0] (first (solve [1 2 3, 4 5 0, 7 8 6]))))))
 
 (deftest two-moves-away-test
-  (testing "Final state (goal) is two moves away."
+  (testing "Final state is two moves away."
     (is (= [1 2 3, 4 5 6, 7 8 0] (first (solve [1 2 3, 4 5 6, 0 7 8]))))
     (is (= [1 2 3, 4 5 6, 7 8 0] (first (solve [1 2 3, 4 0 5, 7 8 6]))))))
 
 (deftest three-moves-away-test
-  (testing "Final state (goal) is three moves away."
+  (testing "Final state is three moves away."
     (is (= [1 2 3, 4 5 6, 7 8 0] (first (solve [1 2 3 0 4 5 7 8 6]))))))
 
 (deftest ^:slow regression-1-test
