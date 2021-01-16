@@ -10,16 +10,16 @@
   (testing "Goal test unhappy case."
     (is (false? (goal? [1 2 3, 4 5 6, 7 0 8])))))
 
-(deftest filter-unexplored-one-arg-test
-  (testing "Only keep nodes which are not queue."
+(deftest without-one-collection-test
+  (testing "Only keep nodes which are not in queue."
     (let [nodes
           [[1 2] [3 4] [5 6]]
 
           queue '([1 2] [5 6])]
           (is (= '([3 4]) (without nodes queue))))))
 
-(deftest filter-unexplored-two-args-test
-  (testing "Only keep nodes which are neither in open list nor closed list."
+(deftest without-two-collection-test
+  (testing "Only keep nodes which are neither in open list nor in closed list."
     (let [nodes
           [[1 2] [3 4] [5 6]]
 
@@ -30,22 +30,22 @@
           (conj #{} [5 6])]
         (is (= '([3 4]) (without nodes open-list closed-list))))))
 
-(deftest initial-state-is-goal-test
-  (testing "Initial state is already the goal."
+(deftest initial-state-is-final-state-test
+  (testing "Initial state is already the final state (goal)."
     (is (= [1 2 3, 4 5 6, 7 8 0] (first (solve [1 2 3, 4 5 6, 7 8 0]))))))
 
 (deftest one-move-away-test
-  (testing "Goal is one move away."
+  (testing "Final state (goal) is one move away."
     (is (= [1 2 3, 4 5 6, 7 8 0] (first (solve [1 2 3, 4 5 6, 7 0 8]))))
     (is (= [1 2 3, 4 5 6, 7 8 0] (first (solve [1 2 3, 4 5 0, 7 8 6]))))))
 
 (deftest two-moves-away-test
-  (testing "Goal is two moves away."
+  (testing "Final state (goal) is two moves away."
     (is (= [1 2 3, 4 5 6, 7 8 0] (first (solve [1 2 3, 4 5 6, 0 7 8]))))
     (is (= [1 2 3, 4 5 6, 7 8 0] (first (solve [1 2 3, 4 0 5, 7 8 6]))))))
 
 (deftest three-moves-away-test
-  (testing "Goal is three moves away."
+  (testing "Final state (goal) is three moves away."
     (is (= [1 2 3, 4 5 6, 7 8 0] (first (solve [1 2 3 0 4 5 7 8 6]))))))
 
 (deftest ^:slow regression-1-test
@@ -71,6 +71,7 @@
         (is (= (shortest-path solution-space initial-state) expected-path)))))
 
 (deftest empty-solution-space-test
-  (testing "It returns the given state as only node of path for an empty solution space."
+  (testing "It should return the initial state as only element of the path, 
+            if the initial state is the final state (aka empty solution space)."
     (let [initial-state [1 2 3, 4 5 6, 7 8 0]]
       (is (= [initial-state] (shortest-path {} initial-state))))))
